@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 COPY *.sln .
-COPY DesafioBackendVertrau/*.csproj ./DesafioBackendVertrau/
+COPY ./DesafioBackendVertrau/*.csproj ./DesafioBackendVertrau/
 RUN dotnet restore
 
 COPY . .

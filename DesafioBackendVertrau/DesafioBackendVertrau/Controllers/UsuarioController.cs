@@ -18,15 +18,27 @@ namespace DesafioBackendVertrau.Controllers
             _context = context;
         }
 
-        // GET: api/<UsuarioController>
+        /// <summary>
+        /// Listar todos os usuários cadastrados
+        /// </summary>
+        /// <returns>Lista de Usuários</returns>
+        /// <response code="200">Retorna a lista de usuários</response>
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<Usuario>), 200)]
         public async Task<ActionResult<IEnumerable<Usuario>>> Get()
         {
             var usuarios = await _context.Usuarios.ToListAsync();
             return Ok(usuarios);
         }
 
-        // GET api/<UsuarioController>/5
+
+        /// <summary>
+        /// Busca um usuário pelo ID
+        /// </summary>
+        /// <param name="id">ID do usuário</param>
+        /// <returns>Usuário encontrado</returns>
+        /// <response code="200">Retorna o usuário</response>
+        /// <response code="404">Usuário não encontrado</response>
         [HttpGet("{id}")]
         public async Task<ActionResult<Usuario>> GetById(int id)
         {
@@ -38,7 +50,12 @@ namespace DesafioBackendVertrau.Controllers
             return Ok(usuario);
         }
 
-        // POST api/<UsuarioController>
+        /// <summary>
+        /// Cadastra um novo usuário
+        /// </summary>
+        /// <param name="usuario">Dados do usuário a ser criado</param>
+        /// <returns code="200">Usuário criado com sucesso</returns>
+        /// <returns code="400">Email cadastrado, data de nascimento não pode ser futura, ou gênero inválido</returns>
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] Usuario usuario)
         {
@@ -64,7 +81,14 @@ namespace DesafioBackendVertrau.Controllers
             return Ok(usuario);
         }
 
-        // PUT api/<UsuarioController>/5
+        /// <summary>
+        /// Atualiza os dados de um usuário existente
+        /// </summary>
+        /// <param name="id">Id do usuário a ser atualizado</param>
+        /// <param name="usuario">Novos dados do usuário</param>
+        /// <response code="200">Usuário atualizado com sucesso</response>
+        /// <response code="400">Email já cadastrado, data de nascimento futura ou gênero inválido</response>
+        /// <response code="404">Usuário não encontrado</response>
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, [FromBody] Usuario usuario)
         {
@@ -102,7 +126,10 @@ namespace DesafioBackendVertrau.Controllers
             return Ok("Usuário atualizado com sucesso!");
         }
 
-        // DELETE api/<UsuarioController>/5
+        /// <summary>Remove um usuário pelo ID</summary>
+        /// <param name="id">ID do usuário a ser removido</param>
+        /// <response code="200">Usuário removido com sucesso</response>
+        /// <response code="404">Usuário não encontrado</response>
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

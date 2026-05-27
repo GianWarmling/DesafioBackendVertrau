@@ -49,7 +49,7 @@ namespace DesafioBackendVertrau.Controllers
                 return BadRequest("Email já cadastrado!");
             }
 
-            if (usuario.DataNascimento > DateTime.Now)
+            if (usuario.DataNascimento.HasValue && usuario.DataNascimento.Value.Date > DateTime.Now.Date)
             {
                 return BadRequest("Data de nascimento não pode ser futura!");
             }
@@ -82,7 +82,7 @@ namespace DesafioBackendVertrau.Controllers
                 return BadRequest("Email já cadastrado!");
             }
 
-            if (usuario.DataNascimento > DateTime.Now)
+            if (usuario.DataNascimento > DateTime.Now.Date)
             {
                 return BadRequest("Data de nascimento não pode ser futura!");
             }

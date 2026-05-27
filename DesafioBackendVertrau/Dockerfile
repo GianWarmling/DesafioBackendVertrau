@@ -2,11 +2,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY *.sln .
-COPY ./DesafioBackendVertrau/*.csproj ./DesafioBackendVertrau/
-RUN dotnet restore
-
 COPY . .
+
+RUN dotnet restore DesafioBackendVertrau/DesafioBackendVertrau.sln
+
 WORKDIR /src/DesafioBackendVertrau
 RUN dotnet publish -c Release -o /app/publish
 
